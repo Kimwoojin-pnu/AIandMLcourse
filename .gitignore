@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# Claude Code local config
+.claude/
+
 # Weeks not yet published
 week9/
 week10/
