@@ -76,6 +76,28 @@ cursor .
 
 ---
 
+## 환경 확인: Hello World! (00_hello_world.py)
+
+본격적인 실습 전에 환경이 올바르게 설정되었는지 확인합니다.
+
+### 코드 실행
+```bash
+cd week1
+uv run python 00_hello_world.py
+```
+
+### 기능
+
+Python 버전과 핵심 패키지 설치 여부를 자동으로 점검합니다:
+- `numpy` — 수치 계산
+- `matplotlib` — 시각화
+- `tensorflow` — 딥러닝 프레임워크
+- `reportlab` — PDF 출력 (선택)
+
+모든 항목에 체크 표시가 나오면 환경 준비 완료입니다.
+
+---
+
 ## 👋 실습: Hello, Neural Network! (01_hello_nn.py)
 
 첫 번째 신경망을 만들어 봅시다. 아주 간단한 수학 공식 `y = 2x - 1`을 데이터만 보고 스스로 깨우치게 할 것입니다.
@@ -128,6 +150,76 @@ model.fit(X, y, epochs=500)
 
 ---
 
+## 🔢 실습 2: 수치 해법 vs 신경망 비교 (02_polynomial_fitting.py)
+
+같은 문제(`y = 2x - 1`)를 신경망이 아닌 고전적인 수치 해법으로 풀어보고, 세 가지 접근법을 비교합니다.
+
+### 코드 실행
+```bash
+uv run python 02_polynomial_fitting.py
+```
+
+### 세 가지 접근법
+
+| 방법 | 도구 | 원리 |
+|------|------|------|
+| 신경망 (Week1 Lab1) | TensorFlow SGD | 경사 하강법 (반복 학습) |
+| 다항식 피팅 | NumPy `polyfit` | 최소자승법 (해석적 해) |
+| 수치 최적화 | SciPy `curve_fit` | 비선형 최소자승법 (Levenberg-Marquardt) |
+
+### 코드 분석
+
+#### Method 1: NumPy Polyfit (해석적 최소자승법)
+```python
+# 1차 다항식 (y = ax + b)으로 피팅
+coefficients = np.polyfit(X, y, deg=1)
+slope_poly = coefficients[0]
+intercept_poly = coefficients[1]
+```
+- 행렬 방정식을 직접 풀어 **한 번에** 정답을 계산
+- 노이즈가 있는 데이터에도 최적의 직선을 찾음
+
+#### Method 2: SciPy Curve Fit (수치 최적화)
+```python
+def linear_function(x, w, b):
+    return w * x + b
+
+popt, pcov = curve_fit(linear_function, X, y, p0=[0.5, 0.5])
+w_opt, b_opt = popt
+```
+- 초기값(`p0`)에서 시작하여 오차를 줄이는 방향으로 반복 최적화
+- 신경망 학습과 개념이 유사하지만, 더 빠르고 간단
+
+### 결과 확인
+```
+[Method 1] NumPy Polyfit (Least Squares)
+Result: y = 2.xxxx x + -1.xxxx   ← 노이즈로 인해 정확히 2, -1은 아님
+
+[Method 2] SciPy Curve Fit (Optimization)
+Result: y = 2.xxxx x + -1.xxxx   ← 유사한 결과
+
+Summary:
+Neural Network (Previous): Iterative learning (Gradient Descent)
+NumPy Polyfit: Analytical solution (Linear Algebra)
+SciPy Curve Fit: Numerical optimization (Levenberg-Marquardt)
+```
+
+출력 그래프: `outputs/02_numerical_fitting.png`
+
+### 핵심 비교
+
+| 특성 | Neural Network | NumPy Polyfit | SciPy curve_fit |
+|------|---------------|---------------|-----------------|
+| 속도 | 느림 (500 에폭) | 매우 빠름 | 빠름 |
+| 코드 복잡도 | 복잡 | 단순 (`1줄`) | 단순 |
+| 유연성 | 높음 (비선형도 가능) | 다항식만 | 임의 함수 가능 |
+| 활용 범위 | 복잡한 패턴 학습 | 단순 회귀 | 수식이 알려진 경우 |
+
+> **핵심 메시지**: 단순한 선형 문제에는 고전적 방법이 더 빠르고 정확합니다. 신경망의 진가는 복잡하고 비선형적인 패턴을 배울 때 발휘됩니다.
+
+---
+
 ## 📝 과제
-1. `01_hello_nn.py`를 실행하고 결과를 확인하세요.
-2. 데이터 `X`와 `y`를 바꿔서 다른 공식(예: `y = 3x + 2`)을 학습시켜 보세요. 잘 맞추나요?
+1. `01_hello_nn.py`와 `02_polynomial_fitting.py`를 모두 실행하고 결과를 비교하세요.
+2. 데이터 `X`와 `y`를 바꿔서 다른 공식(예: `y = 3x + 2`)을 학습시켜 보세요. 세 방법 모두 잘 맞추나요?
+3. 노이즈 크기(`scale=1.0`)를 변경하면 각 방법의 결과가 어떻게 달라지나요?

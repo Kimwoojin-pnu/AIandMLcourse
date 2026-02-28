@@ -46,6 +46,26 @@ y = f(Σ wᵢxᵢ + b)
 
 ---
 
+## 유틸리티: 한글 폰트 확인 (check_fonts.py)
+
+실습 전에 matplotlib에서 사용 가능한 한글 폰트를 확인하는 유틸리티 스크립트입니다.
+
+### 실행 방법
+```bash
+cd week3
+uv run check_fonts.py
+```
+
+### 기능
+
+matplotlib 폰트 매니저에 등록된 폰트 중 다음 한글 폰트를 자동으로 검색합니다:
+- Malgun Gothic, Gulim, Batang, Dotum, NanumGothic, AppleGothic
+
+발견된 폰트 이름을 출력하며, 한글 폰트가 없을 경우 설치된 상위 10개 폰트 목록을 표시합니다.
+그래프 제목이나 레이블에 한글이 깨져 보일 때 먼저 이 스크립트를 실행하여 사용 가능한 폰트를 확인하세요.
+
+---
+
 ## 🔬 Lab 1: Perceptron (01_perceptron.py)
 
 ### 목적
