@@ -15,11 +15,11 @@ print("="*50)
 # 1. 데이터 준비 (Data Preparation)
 # 01_hello_nn.py와 동일한 데이터
 X = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
-y_clean = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype=float)
+y_clean = np.array([-1.0, 2.0, 5.0, 8.0, 11.0, 14.0], dtype=float)
 
 # Add random noise (scale=1.0)
 np.random.seed(42) # For reproducibility
-noise = np.random.normal(loc=0.0, scale=3.0, size=len(X))
+noise = np.random.normal(loc=0.0, scale=0.1, size=len(X))
 y = y_clean + noise
 
 print("Data:")
