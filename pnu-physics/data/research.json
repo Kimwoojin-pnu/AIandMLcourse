@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "title": "입자물리학",
+    "title_en": "Particle Physics",
+    "icon": "atom",
+    "description": "LHC 실험을 통한 표준모형 검증 및 새로운 물리 현상 탐색. 힉스 보손과 암흑물질의 비밀을 파헤칩니다.",
+    "keywords": ["힉스 보손", "표준모형", "암흑물질"],
+    "color": "blue",
+    "gradient": "from-blue-500 to-indigo-600",
+    "papers": 142
+  },
+  {
+    "id": 2,
+    "title": "응집물질물리",
+    "title_en": "Condensed Matter",
+    "icon": "crystal",
+    "description": "위상 부도체, 초전도체, 2D 나노물질의 양자 현상 연구. 미래 전자소자의 혁명을 이끕니다.",
+    "keywords": ["위상물질", "초전도", "그래핀"],
+    "color": "purple",
+    "gradient": "from-purple-500 to-violet-600",
+    "papers": 198
+  },
+  {
+    "id": 3,
+    "title": "나노물리학",
+    "title_en": "Nanophysics",
+    "icon": "nano",
+    "description": "나노스케일에서의 물리 현상 탐구 및 나노 소자 개발. 원자 단위에서 물질의 성질을 제어합니다.",
+    "keywords": ["나노소자", "양자점", "분자전자"],
+    "color": "cyan",
+    "gradient": "from-cyan-500 to-blue-600",
+    "papers": 87
+  },
+  {
+    "id": 4,
+    "title": "광학 및 포토닉스",
+    "title_en": "Optics & Photonics",
+    "icon": "light",
+    "description": "레이저 물리, 양자 광학, 비선형 광학 현상 연구. 빛과 물질의 상호작용을 극한까지 탐구합니다.",
+    "keywords": ["레이저", "양자광학", "포토닉 결정"],
+    "color": "amber",
+    "gradient": "from-amber-500 to-yellow-600",
+    "papers": 116
+  },
+  {
+    "id": 5,
+    "title": "핵 및 하드론 물리",
+    "title_en": "Nuclear & Hadron",
+    "icon": "nucleus",
+    "description": "핵의 구조와 반응, 쿼크-글루온 플라즈마 연구. 우주 탄생의 순간을 실험실에서 재현합니다.",
+    "keywords": ["중이온", "쿼크-글루온", "핵구조"],
+    "color": "orange",
+    "gradient": "from-orange-500 to-red-600",
+    "papers": 203
+  },
+  {
+    "id": 6,
+    "title": "천체물리학",
+    "title_en": "Astrophysics",
+    "icon": "galaxy",
+    "description": "블랙홀, 중성자별, 중력파 연구. 우주의 극한 환경에서 일어나는 물리 현상을 탐구합니다.",
+    "keywords": ["블랙홀", "중력파", "우주론"],
+    "color": "indigo",
+    "gradient": "from-indigo-500 to-purple-600",
+    "papers": 89
+  },
+  {
+    "id": 7,
+    "title": "통계물리 및 복잡계",
+    "title_en": "Statistical Physics",
+    "icon": "network",
+    "description": "비평형 통계역학, 복잡 네트워크, 생물물리학 연구. 복잡한 시스템 속의 보편적 법칙을 발견합니다.",
+    "keywords": ["복잡계", "네트워크", "비평형"],
+    "color": "teal",
+    "gradient": "from-teal-500 to-emerald-600",
+    "papers": 74
+  },
+  {
+    "id": 8,
+    "title": "양자정보 및 컴퓨팅",
+    "title_en": "Quantum Computing",
+    "icon": "quantum",
+    "description": "양자 알고리즘, 양자 오류정정, 양자 시뮬레이션 연구. 양자컴퓨터 시대를 선도합니다.",
+    "keywords": ["큐비트", "양자얽힘", "양자우월성"],
+    "color": "sky",
+    "gradient": "from-sky-500 to-cyan-600",
+    "papers": 56
+  }
+]

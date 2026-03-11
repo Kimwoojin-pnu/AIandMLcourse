@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="부산대학교 물리학과 - 우주의 근본 법칙을 탐구하는 최첨단 연구와 교육의 중심" />
+  <meta name="keywords" content="부산대학교, 물리학과, 입자물리, 응집물질, 양자, 천체물리" />
+  <title>{% block title %}부산대학교 물리학과{% endblock %}</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            space: {
+              DEFAULT: '#040818',
+              mid: '#0a0e27',
+              light: '#0f1535',
+            },
+            quantum: {
+              blue: '#3b82f6',
+              purple: '#7c3aed',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+          },
+          animation: {
+            'spin-slow': 'spin 8s linear infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 3s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/custom.css" />
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-space text-slate-100 font-sans antialiased">
+
+  <!-- Navigation -->
+  {% include "partials/nav.html" %}
+
+  <!-- Main Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  {% include "partials/footer.html" %}
+
+  <!-- Scripts -->
+  <script src="/static/js/particles.js"></script>
+  <script src="/static/js/main.js"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

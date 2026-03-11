@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "김태호",
+    "name_en": "Taeho Kim",
+    "title": "교수",
+    "specialty": "입자물리학",
+    "specialty_en": "Particle Physics",
+    "email": "thkim@pusan.ac.kr",
+    "lab": "입자물리연구실",
+    "research": ["표준모형 확장", "LHC 실험", "힉스 보손"],
+    "avatar_color": "from-blue-600 to-indigo-700"
+  },
+  {
+    "id": 2,
+    "name": "이수진",
+    "name_en": "Sujin Lee",
+    "title": "교수",
+    "specialty": "응집물질물리학",
+    "specialty_en": "Condensed Matter Physics",
+    "email": "sjlee@pusan.ac.kr",
+    "lab": "나노물리연구실",
+    "research": ["양자물질", "위상부도체", "2D 나노물질"],
+    "avatar_color": "from-purple-600 to-violet-700"
+  },
+  {
+    "id": 3,
+    "name": "박준혁",
+    "name_en": "Junhyuk Park",
+    "title": "교수",
+    "specialty": "광학 및 포토닉스",
+    "specialty_en": "Optics & Photonics",
+    "email": "jhpark@pusan.ac.kr",
+    "lab": "광학연구실",
+    "research": ["레이저 물리", "양자 광학", "비선형 광학"],
+    "avatar_color": "from-cyan-600 to-blue-700"
+  },
+  {
+    "id": 4,
+    "name": "최민아",
+    "name_en": "Mina Choi",
+    "title": "교수",
+    "specialty": "핵물리학",
+    "specialty_en": "Nuclear Physics",
+    "email": "machoi@pusan.ac.kr",
+    "lab": "핵물리연구실",
+    "research": ["중이온 충돌", "핵구조", "방사성 동위원소"],
+    "avatar_color": "from-amber-600 to-orange-700"
+  },
+  {
+    "id": 5,
+    "name": "정우성",
+    "name_en": "Woosung Jung",
+    "title": "부교수",
+    "specialty": "천체물리학",
+    "specialty_en": "Astrophysics",
+    "email": "wsjung@pusan.ac.kr",
+    "lab": "천체물리연구실",
+    "research": ["블랙홀 물리", "중력파", "우주론"],
+    "avatar_color": "from-indigo-600 to-purple-700"
+  },
+  {
+    "id": 6,
+    "name": "한지민",
+    "name_en": "Jimin Han",
+    "title": "부교수",
+    "specialty": "통계물리학",
+    "specialty_en": "Statistical Physics",
+    "email": "jmhan@pusan.ac.kr",
+    "lab": "복잡계연구실",
+    "research": ["복잡계", "네트워크 과학", "비평형 통계역학"],
+    "avatar_color": "from-teal-600 to-emerald-700"
+  },
+  {
+    "id": 7,
+    "name": "오현준",
+    "name_en": "Hyunjun Oh",
+    "title": "조교수",
+    "specialty": "이론 핵물리",
+    "specialty_en": "Theoretical Nuclear Physics",
+    "email": "hjoh@pusan.ac.kr",
+    "lab": "이론물리연구실",
+    "research": ["양자색역학", "쿼크-글루온 플라즈마", "핵력"],
+    "avatar_color": "from-rose-600 to-pink-700"
+  },
+  {
+    "id": 8,
+    "name": "윤서연",
+    "name_en": "Seoyeon Yoon",
+    "title": "조교수",
+    "specialty": "양자컴퓨팅",
+    "specialty_en": "Quantum Computing",
+    "email": "syyoon@pusan.ac.kr",
+    "lab": "양자정보연구실",
+    "research": ["양자 알고리즘", "양자 오류정정", "양자 시뮬레이션"],
+    "avatar_color": "from-sky-600 to-cyan-700"
+  }
+]
