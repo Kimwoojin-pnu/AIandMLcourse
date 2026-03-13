@@ -8,6 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+dl_env/
 
 # Claude Code local config
 .claude/
