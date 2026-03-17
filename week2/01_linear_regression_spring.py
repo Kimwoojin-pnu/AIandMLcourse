@@ -52,8 +52,8 @@ print("학습 완료!")
 
 # 5. 결과 확인 및 예측 (Prediction)
 # 학습된 파라미터(가중치와 편향) 확인
-learned_w = float(model.layers[0].get_weights()[0][0]) # 기울기 (1kg당 늘어나는 길이)
-learned_b = float(model.layers[0].get_weights()[1][0]) # 절편 (초기 길이)
+learned_w = float(model.layers[0].get_weights()[0].flatten()[0]) # 기울기 (1kg당 늘어나는 길이)
+learned_b = float(model.layers[0].get_weights()[1].flatten()[0]) # 절편 (초기 길이)
 
 print(f"\n[학습 결과]")
 print(f"예측된 식: 길이 = {learned_w:.2f} * 무게 + {learned_b:.2f}")
