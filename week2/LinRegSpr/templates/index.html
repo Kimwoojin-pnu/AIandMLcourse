@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hooke's Law — TensorFlow Neural Network</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyan:   "#00d4ff",
+            purple: "#7c3aed",
+            green:  "#10b981",
+            orange: "#f97316",
+            panel:  "#161b22",
+            border: "#30363d",
+          },
+          fontFamily: {
+            mono: ["JetBrains Mono", "Fira Code", "monospace"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+<body class="bg-[#0d1117] text-[#e6edf3] antialiased">
+
+  <!-- ── Particle canvas background ─────────────────────────────────────── -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- NAVBAR                                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <nav class="fixed top-0 w-full z-50 bg-[#0d1117]/80 backdrop-blur-lg border-b border-[#30363d]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group no-underline">
+        <div class="w-8 h-8 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center
+                    group-hover:bg-cyan/20 transition">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="7" stroke="#00d4ff" stroke-width="1.5"/>
+            <path d="M8 2 Q12 5 8 8 Q4 11 8 14" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <span class="font-bold text-lg text-[#e6edf3] group-hover:text-cyan transition">HooksLawNet</span>
+      </a>
+
+      <!-- Links -->
+      <div class="hidden md:flex items-center gap-7">
+        <a href="#theory"    class="nav-link">Theory</a>
+        <a href="#predictor" class="nav-link">Predictor</a>
+        <a href="#training"  class="nav-link">Training</a>
+        <a href="#results"   class="nav-link">Results</a>
+        <a href="/docs" target="_blank"
+           class="px-4 py-1.5 rounded-lg border border-[#30363d] text-[#8b949e] text-sm
+                  hover:border-cyan/40 hover:text-cyan transition">
+          API Docs
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- HERO                                                                   -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+
+    <!-- Radial glow backdrop -->
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px]
+                  rounded-full bg-[#7c3aed]/8 blur-[120px]"></div>
+      <div class="absolute top-1/3 left-1/3 w-[400px] h-[400px]
+                  rounded-full bg-[#00d4ff]/5 blur-[90px]"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-5xl mx-auto px-4 text-center">
+      <!-- Badge -->
+      <div class="inline-flex mb-8">
+        <span class="badge">
+          <span class="badge-dot"></span>
+          TensorFlow · FastAPI · Tailwind CSS
+        </span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6 grad-text">
+        Hooke's Law<br/>Neural Network
+      </h1>
+      <p class="text-lg md:text-xl text-[#8b949e] max-w-2xl mx-auto mb-10 leading-relaxed">
+        A deep learning model that discovers the fundamental law of spring mechanics
+        and predicts elongation with sub-millimetre accuracy.
+      </p>
+
+      <!-- Equation -->
+      <div class="eq-card float mb-10">
+        <div class="eq-main">F = k · x</div>
+        <div class="eq-sub">x = mg / k</div>
+        <div class="eq-label">Hooke's Law · 1678 · k = 50 N/m</div>
+      </div>
+
+      <!-- Hero spring SVG -->
+      <div class="flex justify-center mb-10">
+        <svg id="hero-spring-svg" width="60" height="210" class="float opacity-90"
+             xmlns="http://www.w3.org/2000/svg">
+        </svg>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#predictor"
+           class="px-8 py-3.5 bg-cyan text-[#0d1117] font-bold rounded-xl
+                  hover:bg-cyan/90 transition-all hover:scale-105 glow-cyan">
+          Try Predictor →
+        </a>
+        <a href="#training"
+           class="px-8 py-3.5 border border-[#30363d] rounded-xl font-semibold text-[#8b949e]
+                  hover:border-[#7c3aed]/50 hover:text-[#e6edf3] transition-all">
+          View Training
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#30363d] animate-bounce text-2xl">↓</div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- THEORY                                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section id="theory" class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-heading">
+        Physics <span class="text-cyan">Theory</span>
+      </h2>
+      <p class="section-sub">The classical mechanics that this neural network learns from scratch</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <!-- Card 1 -->
+        <div class="glass-card theory-card p-7 hover:border-cyan/40">
+          <div class="w-12 h-12 bg-cyan/10 rounded-xl flex items-center justify-center text-2xl mb-5
+                      border border-cyan/20">🌀</div>
+          <h3 class="text-lg font-bold mb-3">Hooke's Law</h3>
+          <p class="text-[#8b949e] text-sm leading-relaxed mb-5">
+            The restoring force of a spring is directly proportional to its displacement
+            from the equilibrium position. Valid within the elastic limit.
+          </p>
+          <div class="p-3 bg-[#0d1117] rounded-lg text-center font-mono text-cyan font-bold text-xl">
+            F = −kx
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass-card theory-card p-7 hover:border-purple/40">
+          <div class="w-12 h-12 bg-purple/10 rounded-xl flex items-center justify-center text-2xl mb-5
+                      border border-purple/20">⚖️</div>
+          <h3 class="text-lg font-bold mb-3">Static Equilibrium</h3>
+          <p class="text-[#8b949e] text-sm leading-relaxed mb-5">
+            When a mass hangs at rest, the spring force exactly balances gravitational force.
+            Net force is zero, giving us the elongation formula.
+          </p>
+          <div class="p-3 bg-[#0d1117] rounded-lg text-center font-mono text-[#a78bfa] font-bold text-xl">
+            kx = mg
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass-card theory-card p-7 hover:border-green/40">
+          <div class="w-12 h-12 bg-green/10 rounded-xl flex items-center justify-center text-2xl mb-5
+                      border border-green/20">📐</div>
+          <h3 class="text-lg font-bold mb-3">Elongation Prediction</h3>
+          <p class="text-[#8b949e] text-sm leading-relaxed mb-5">
+            By combining Hooke's Law and the equilibrium condition we can directly
+            predict the spring extension for any suspended mass.
+          </p>
+          <div class="p-3 bg-[#0d1117] rounded-lg text-center font-mono text-green font-bold text-xl">
+            x = mg / k
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Parameters table -->
+      <div class="mt-10 glass-card p-6 max-w-lg mx-auto">
+        <h3 class="font-bold text-center mb-5 text-[#8b949e] uppercase tracking-widest text-xs">
+          Physical Parameters
+        </h3>
+        <div class="space-y-2">
+          <div class="stat-pill">
+            <span class="text-[#8b949e]">Spring constant  k</span>
+            <span class="stat-value text-cyan">50.0 N/m</span>
+          </div>
+          <div class="stat-pill">
+            <span class="text-[#8b949e]">Gravitational acc  g</span>
+            <span class="stat-value text-orange">9.81 m/s²</span>
+          </div>
+          <div class="stat-pill">
+            <span class="text-[#8b949e]">Training noise  σ</span>
+            <span class="stat-value text-[#a78bfa]">3.0 mm</span>
+          </div>
+          <div class="stat-pill">
+            <span class="text-[#8b949e]">Training samples  N</span>
+            <span class="stat-value text-green">400</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- INTERACTIVE PREDICTOR                                                  -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section id="predictor" class="py-24 px-4 bg-[#161b22]/25">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="section-heading">
+        Interactive <span class="text-cyan">Predictor</span>
+      </h2>
+      <p class="section-sub">Adjust the mass and watch the neural network predict elongation in real-time</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+        <!-- ── Controls ── -->
+        <div class="space-y-5">
+
+          <!-- Mass slider -->
+          <div class="glass-card p-6">
+            <label class="block text-xs uppercase tracking-widest text-[#8b949e] mb-4">
+              Mass
+            </label>
+            <div class="flex items-center gap-4 mb-3">
+              <span class="text-xs text-[#8b949e] font-mono">50 g</span>
+              <input type="range" id="mass-slider" min="0.05" max="5.0" step="0.05" value="1.0"
+                     class="flex-1" />
+              <span class="text-xs text-[#8b949e] font-mono">5 kg</span>
+            </div>
+            <div class="text-center mb-5">
+              <span id="mass-display" class="text-3xl font-mono font-bold text-cyan">1.00 kg</span>
+            </div>
+
+            <!-- Quick-select buttons -->
+            <div class="grid grid-cols-5 gap-2">
+              <button class="mass-btn" data-mass="0.1"  onclick="setMass(0.1)">100 g</button>
+              <button class="mass-btn" data-mass="0.5"  onclick="setMass(0.5)">500 g</button>
+              <button class="mass-btn active" data-mass="1.0" onclick="setMass(1.0)">1 kg</button>
+              <button class="mass-btn" data-mass="2.0"  onclick="setMass(2.0)">2 kg</button>
+              <button class="mass-btn" data-mass="5.0"  onclick="setMass(5.0)">5 kg</button>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="glass-card p-6">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="font-bold">Prediction Results</h3>
+              <div id="loading-spinner" class="spinner hidden"></div>
+            </div>
+            <div id="results-panel" class="space-y-1">
+              <div class="result-row">
+                <span class="result-label">Neural Network</span>
+                <span id="nn-result" class="result-val text-cyan">— cm</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">Theoretical  (mg/k)</span>
+                <span id="theo-result" class="result-val text-orange">— cm</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">Relative Error</span>
+                <span id="error-result" class="result-val text-green">— %</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model stats -->
+          <div class="glass-card p-6">
+            <h3 class="font-bold mb-4">Model Statistics</h3>
+            <div class="space-y-2">
+              <div class="stat-pill">
+                <span class="text-[#8b949e]">Parameters</span>
+                <span id="stat-params" class="stat-value text-cyan">…</span>
+              </div>
+              <div class="stat-pill">
+                <span class="text-[#8b949e]">Final MAE</span>
+                <span id="stat-mae" class="stat-value text-green">…</span>
+              </div>
+              <div class="stat-pill">
+                <span class="text-[#8b949e]">Val MAE</span>
+                <span id="stat-val-mae" class="stat-value text-[#a78bfa]">…</span>
+              </div>
+              <div class="stat-pill">
+                <span class="text-[#8b949e]">Epochs</span>
+                <span id="stat-epochs" class="stat-value text-orange">…</span>
+              </div>
+              <div class="stat-pill">
+                <span class="text-[#8b949e]">Final Huber Loss</span>
+                <span id="stat-loss" class="stat-value text-[#8b949e]">…</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Spring Visualisation ── -->
+        <div class="flex flex-col items-center gap-4">
+          <div class="glass-card p-8 w-full max-w-xs mx-auto flex flex-col items-center">
+            <div class="text-xs uppercase tracking-widest text-[#8b949e] mb-6">Spring Visualisation</div>
+
+            <div class="relative flex justify-center w-full" style="min-height:280px">
+              <svg id="spring-svg" width="100" height="280" xmlns="http://www.w3.org/2000/svg">
+                <!-- ceiling -->
+                <rect x="0" y="0" width="100" height="6" rx="2" fill="#8b949e"/>
+                <!-- spring coils (updated by JS) -->
+                <polyline id="spring-coils" points=""
+                          fill="none" stroke="#00d4ff" stroke-width="2.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- mass box (updated by JS) -->
+                <rect id="spring-mass" x="22" y="160" width="56" height="38" rx="5" fill="#f97316"/>
+                <text id="mass-label" x="50" y="184" text-anchor="middle"
+                      fill="white" font-size="11" font-weight="700" font-family="JetBrains Mono">
+                  1.0 kg
+                </text>
+              </svg>
+            </div>
+
+            <div class="mt-4 text-sm text-[#8b949e]">
+              Elongation:
+              <span id="spring-elongation" class="font-mono font-bold text-cyan">— cm</span>
+            </div>
+          </div>
+
+          <!-- Architecture card -->
+          <div class="glass-card p-5 w-full max-w-xs mx-auto">
+            <div class="text-xs uppercase tracking-widest text-[#8b949e] mb-3">Architecture</div>
+            <div class="space-y-1 font-mono text-xs">
+              <div class="flex justify-between">
+                <span class="text-cyan">Input</span>
+                <span class="text-[#8b949e]">mass (1)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[#a78bfa]">Dense + ReLU</span>
+                <span class="text-[#8b949e]">64 units</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[#8b949e]">BatchNorm</span>
+                <span class="text-[#8b949e]">—</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[#a78bfa]">Dense + ReLU</span>
+                <span class="text-[#8b949e]">32 units</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[#a78bfa]">Dense + ReLU</span>
+                <span class="text-[#8b949e]">16 units</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-green">Output</span>
+                <span class="text-[#8b949e]">elongation (1)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- TRAINING CHARTS (interactive Chart.js)                                 -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section id="training" class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-heading">
+        Model <span class="text-purple">Training</span>
+      </h2>
+      <p class="section-sub">Live charts built from training history — loss convergence by epoch</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="glass-card p-5">
+          <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+            Huber Loss — Train vs Validation (log scale)
+          </h3>
+          <canvas id="chart-loss" height="180"></canvas>
+        </div>
+        <div class="glass-card p-5">
+          <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+            Mean Absolute Error — Train vs Validation
+          </h3>
+          <canvas id="chart-mae" height="180"></canvas>
+        </div>
+      </div>
+
+      <!-- Static matplotlib PNG: loss_history -->
+      <div class="glass-card p-5">
+        <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+          High-Resolution Export — loss_history.png
+        </h3>
+        <img src="/output/loss_history.png" alt="Loss History" class="plot-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- RESULTS                                                                -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section id="results" class="py-24 px-4 bg-[#161b22]/25">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-heading">
+        Analysis <span class="text-green">Results</span>
+      </h2>
+      <p class="section-sub">All visualisations saved as high-resolution PNG files in output/</p>
+
+      <!-- 2-col plots -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="glass-card p-5">
+          <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+            Training Data — training_data.png
+          </h3>
+          <img src="/output/training_data.png" alt="Training Data" class="plot-img" />
+        </div>
+        <div class="glass-card p-5">
+          <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+            NN vs Hooke's Law — predictions.png
+          </h3>
+          <img src="/output/predictions.png" alt="Predictions" class="plot-img" />
+        </div>
+      </div>
+
+      <!-- Spring physics -->
+      <div class="glass-card p-5 mb-6">
+        <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+          Spring Physics at Different Loads — spring_physics.png
+        </h3>
+        <img src="/output/spring_physics.png" alt="Spring Physics" class="plot-img" />
+      </div>
+
+      <!-- Dashboard -->
+      <div class="glass-card p-5">
+        <h3 class="font-semibold mb-4 text-sm uppercase tracking-widest text-[#8b949e]">
+          Summary Dashboard — dashboard.png
+        </h3>
+        <img src="/output/dashboard.png" alt="Dashboard" class="plot-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- FOOTER                                                                 -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <footer class="border-t border-[#30363d] py-14 px-4 text-center">
+    <div class="text-3xl font-mono font-black text-cyan mb-2">F = k · x</div>
+    <p class="text-[#8b949e] text-sm mt-1">TensorFlow · FastAPI · Tailwind CSS</p>
+    <p class="text-[#484f58] text-xs mt-3">Spring constant k = 50 N/m · Gravity g = 9.81 m/s²</p>
+    <div class="mt-6 flex justify-center gap-6 text-xs text-[#484f58]">
+      <a href="/docs"    class="hover:text-cyan transition">API Docs</a>
+      <a href="/api/model-info" class="hover:text-cyan transition">Model Info</a>
+      <a href="/api/history"    class="hover:text-cyan transition">Training History</a>
+    </div>
+  </footer>
+
+  <!-- App JS -->
+  <script src="/static/js/app.js"></script>
+
+</body>
+</html>
