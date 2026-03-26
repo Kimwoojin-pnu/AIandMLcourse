@@ -1,0 +1,439 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-03-26T12:53:25.722Z",
+  "activeFeatures": [
+    "model",
+    "LinRegSpr",
+    "js",
+    "activation_functions_visualizer",
+    "forward_propagation_visualizer",
+    "mlp_visualizer",
+    "universal_approximation_visualizer",
+    "cnn_filter_visualizer",
+    "logic",
+    "panels",
+    "week3"
+  ],
+  "primaryFeature": "model",
+  "features": {
+    "model": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-18T00:44:28.719Z",
+        "lastUpdated": "2026-03-18T00:45:39.985Z"
+      },
+      "lastFile": "/c/Users/user/AIandMLcourse/week2/LinRegSpr/model/train.py"
+    },
+    "LinRegSpr": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-18T00:46:00.211Z",
+        "lastUpdated": "2026-03-18T00:46:00.211Z"
+      },
+      "lastFile": "/c/Users/user/AIandMLcourse/week2/LinRegSpr/main.py"
+    },
+    "js": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-18T00:47:35.773Z",
+        "lastUpdated": "2026-03-18T00:47:35.773Z"
+      },
+      "lastFile": "/c/Users/user/AIandMLcourse/week2/LinRegSpr/static/js/app.js"
+    },
+    "activation_functions_visualizer": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T02:23:16.990Z",
+        "lastUpdated": "2026-03-25T02:25:19.270Z"
+      },
+      "lastFile": "C:/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/activation_functions_visualizer/activation_functions_visualizer/main.py"
+    },
+    "forward_propagation_visualizer": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T02:25:42.947Z",
+        "lastUpdated": "2026-03-25T02:27:53.334Z"
+      },
+      "lastFile": "C:/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/forward_propagation_visualizer/forward_propagation_visualizer/main.py"
+    },
+    "mlp_visualizer": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T02:28:05.563Z",
+        "lastUpdated": "2026-03-25T02:30:15.167Z"
+      },
+      "lastFile": "C:/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/mlp_visualizer/mlp_visualizer/main.py"
+    },
+    "universal_approximation_visualizer": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T02:30:29.771Z",
+        "lastUpdated": "2026-03-25T02:32:33.299Z"
+      },
+      "lastFile": "C:/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/universal_approximation_visualizer/universal_approximation_visualizer/main.py"
+    },
+    "cnn_filter_visualizer": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-26T11:45:34.659Z",
+        "lastUpdated": "2026-03-26T11:48:30.625Z"
+      },
+      "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\cnn_filter_visualizer\\app.py"
+    },
+    "logic": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-26T11:45:52.571Z",
+        "lastUpdated": "2026-03-26T11:45:52.571Z"
+      },
+      "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\cnn_filter_visualizer\\logic\\convolution.py"
+    },
+    "panels": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-26T11:46:21.477Z",
+        "lastUpdated": "2026-03-26T11:47:43.831Z"
+      },
+      "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\cnn_filter_visualizer\\panels\\control_panel.py"
+    },
+    "week3": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-26T12:52:52.672Z",
+        "lastUpdated": "2026-03-26T12:53:25.721Z"
+      },
+      "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\05_universal_approximation.py"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-18T00:02:14.905Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-03-26T12:53:25.722Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-03-18T00:44:28.719Z",
+      "feature": "model",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T00:45:39.985Z",
+      "feature": "model",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T00:46:00.211Z",
+      "feature": "LinRegSpr",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T00:47:35.773Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:23:16.990Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:23:27.934Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:23:37.327Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:24:09.304Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:24:39.196Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:24:58.037Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:25:12.651Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:25:19.270Z",
+      "feature": "activation_functions_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:25:42.947Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:25:51.136Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:26:02.137Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:26:29.886Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:27:10.375Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:27:29.678Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:27:45.986Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:27:53.334Z",
+      "feature": "forward_propagation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:28:05.563Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:28:17.011Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:28:30.148Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:28:56.078Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:29:35.068Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:29:52.643Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:30:08.485Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:30:15.167Z",
+      "feature": "mlp_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:30:29.771Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:30:39.700Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:30:55.644Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:31:23.437Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:31:54.682Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:32:12.416Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:32:28.147Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T02:32:33.299Z",
+      "feature": "universal_approximation_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T11:45:34.659Z",
+      "feature": "cnn_filter_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T11:45:52.571Z",
+      "feature": "logic",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T11:46:21.477Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T11:46:46.788Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T11:47:43.831Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T11:48:30.625Z",
+      "feature": "cnn_filter_visualizer",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T12:52:52.672Z",
+      "feature": "week3",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T12:53:25.721Z",
+      "feature": "week3",
+      "phase": "do",
+      "action": "updated"
+    }
+  ]
+}
