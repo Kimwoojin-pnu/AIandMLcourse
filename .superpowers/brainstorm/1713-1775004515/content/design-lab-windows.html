@@ -1,0 +1,161 @@
+<h2>설계 Section 2 · BaseLabWindow & 각 Lab</h2>
+<p class="subtitle">3패널 뼈대 + QThread 학습 흐름 + Lab별 시각화</p>
+
+<div class="section">
+  <h3>BaseLabWindow — 3패널 구조</h3>
+  <div class="mockup">
+    <div class="mockup-header">모든 Lab 공통 레이아웃</div>
+    <div class="mockup-body" style="padding:0">
+      <div style="background:#1A56A0;color:#fff;padding:7px 12px;font-size:12px;font-weight:bold">
+        Lab N · 제목  |  MIT 6.S191 Week 4
+      </div>
+      <div style="display:flex;min-height:380px">
+
+        <!-- 좌: 컨트롤 패널 (고정 200px) -->
+        <div style="width:200px;background:#f5f7fa;border-right:1px solid #ddd;padding:10px;font-size:11px">
+          <div style="font-weight:bold;color:#1A56A0;margin-bottom:8px;font-size:12px">⚙ 파라미터</div>
+
+          <div style="margin-bottom:6px">
+            <div style="color:#555;margin-bottom:2px">Hidden Layers</div>
+            <div style="background:#fff;border:1px solid #ccd;padding:4px 6px;border-radius:3px;font-family:monospace">[64, 64]</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="color:#555;margin-bottom:2px">Activation</div>
+            <div style="background:#fff;border:1px solid #ccd;padding:4px 6px;border-radius:3px">tanh ▾</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="color:#555;margin-bottom:2px">Epochs</div>
+            <div style="background:#fff;border:1px solid #ccd;padding:4px 6px;border-radius:3px">1000</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="color:#555;margin-bottom:2px">Learning Rate</div>
+            <div style="background:#fff;border:1px solid #ccd;padding:4px 6px;border-radius:3px">0.001</div>
+          </div>
+
+          <div style="border-top:1px solid #ddd;margin:10px 0 8px"></div>
+          <div style="font-weight:bold;color:#1A56A0;margin-bottom:6px;font-size:12px">🎯 Lab 고유 파라미터</div>
+          <div style="background:#eef2f7;padding:6px;border-radius:3px;color:#888;font-size:10px;text-align:center">
+            각 Lab 서브클래스가<br>여기에 위젯 추가
+          </div>
+
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:5px">
+            <div style="background:#1A56A0;color:#fff;text-align:center;padding:6px;border-radius:4px;font-size:11px;cursor:pointer">▶ Train</div>
+            <div style="background:#e74c3c;color:#fff;text-align:center;padding:6px;border-radius:4px;font-size:11px;cursor:pointer">⏹ Stop</div>
+            <div style="background:#eee;color:#555;text-align:center;padding:6px;border-radius:4px;font-size:11px;cursor:pointer">↺ Reset</div>
+          </div>
+
+          <div style="margin-top:10px">
+            <div style="background:#27ae60;border-radius:3px;height:4px;width:70%"></div>
+            <div style="color:#888;font-size:10px;margin-top:3px">Epoch 703 / 1000</div>
+          </div>
+        </div>
+
+        <!-- 중: 메인 차트 (flex 확장) -->
+        <div style="flex:2;padding:12px;display:flex;flex-direction:column;gap:8px;background:#fafafa">
+          <div style="font-weight:bold;color:#1A56A0;font-size:11px">📐 메인 시각화</div>
+          <div style="flex:1;background:#fff;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:11px">
+            MatplotlibCanvas — Lab별 주요 차트<br>
+            (함수 근사 / 궤적 / 모델 비교 / 진자 시뮬레이션)
+          </div>
+        </div>
+
+        <!-- 우: 정보 패널 (고정 160px) -->
+        <div style="width:160px;border-left:1px solid #ddd;padding:10px;font-size:11px;background:#fff">
+          <div style="font-weight:bold;color:#1A56A0;margin-bottom:8px;font-size:12px">📊 학습 현황</div>
+
+          <div style="margin-bottom:5px">
+            <div style="color:#888;font-size:10px">Train Loss</div>
+            <div style="font-weight:bold;color:#e74c3c">0.00234</div>
+          </div>
+          <div style="margin-bottom:5px">
+            <div style="color:#888;font-size:10px">Val Loss</div>
+            <div style="font-weight:bold;color:#3498db">0.00289</div>
+          </div>
+          <div style="margin-bottom:10px">
+            <div style="color:#888;font-size:10px">MAE</div>
+            <div style="font-weight:bold;color:#27ae60">0.0381</div>
+          </div>
+
+          <div style="background:#f5f7fa;border:1px solid #ddd;border-radius:3px;height:80px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:10px;margin-bottom:8px">
+            📈 Loss 미니차트
+          </div>
+
+          <div style="border-top:1px solid #ddd;padding-top:8px">
+            <div style="font-weight:bold;color:#1A56A0;margin-bottom:5px;font-size:11px">🔬 Lab 고유 수치</div>
+            <div style="background:#eef2f7;padding:5px;border-radius:3px;color:#888;font-size:10px;text-align:center">
+              서브클래스가<br>채우는 영역
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div style="background:#eee;padding:5px 12px;font-size:10px;color:#888">
+        MatplotlibCanvas (FigureCanvasQTAgg) · QThread TrainWorker · PySide6 Signals
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>QThread 학습 흐름</h3>
+  <div class="mockup">
+    <div class="mockup-body" style="font-size:11px">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <div style="background:#1A56A0;color:#fff;padding:6px 10px;border-radius:5px">Train 버튼 클릭</div>
+        <div style="color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:6px 10px;border-radius:5px">TrainWorker(QThread)<br><span style="color:#888;font-size:10px">model, params 전달</span></div>
+        <div style="color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:6px 10px;border-radius:5px">on_epoch_end 콜백<br><span style="color:#888;font-size:10px">epoch_done Signal emit</span></div>
+        <div style="color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:6px 10px;border-radius:5px">UI 스레드<br><span style="color:#888;font-size:10px">차트·수치 업데이트</span></div>
+      </div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+        <div style="background:#e74c3c;color:#fff;padding:5px 10px;border-radius:5px">Stop 버튼</div>
+        <div style="color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:5px 10px;border-radius:5px;font-size:10px">worker.stop_flag = True<br>→ 다음 epoch에서 학습 종료</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Lab별 고유 시각화 요약</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:11px">
+    <thead>
+      <tr style="background:#1A56A0;color:#fff">
+        <th style="padding:7px 10px;text-align:left">Lab</th>
+        <th style="padding:7px 10px;text-align:left">고유 파라미터</th>
+        <th style="padding:7px 10px;text-align:left">메인 차트</th>
+        <th style="padding:7px 10px;text-align:left">우측 고유 수치</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee">
+        <td style="padding:7px 10px;font-weight:bold">📐 Lab 1<br>함수 근사</td>
+        <td style="padding:7px 10px">함수 선택 (sin, cos+sin, x·sin)<br>네트워크 크기 선택</td>
+        <td style="padding:7px 10px">True vs Predicted 함수 곡선</td>
+        <td style="padding:7px 10px">MSE, R²</td>
+      </tr>
+      <tr style="background:#fafafa;border-bottom:1px solid #eee">
+        <td style="padding:7px 10px;font-weight:bold">🚀 Lab 2<br>포물선</td>
+        <td style="padding:7px 10px">초기속력 v₀<br>발사각도 θ</td>
+        <td style="padding:7px 10px">True vs Predicted 궤적 (x-y)</td>
+        <td style="padding:7px 10px">최대 높이, 사거리 오차</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee">
+        <td style="padding:7px 10px;font-weight:bold">⚖️ Lab 3<br>과적합</td>
+        <td style="padding:7px 10px">모델 크기 (Under/Good/Over)<br>Dropout 비율</td>
+        <td style="padding:7px 10px">3개 모델 예측 곡선 비교</td>
+        <td style="padding:7px 10px">Train/Val Loss 갭</td>
+      </tr>
+      <tr style="background:#fafafa">
+        <td style="padding:7px 10px;font-weight:bold">🕰️ Lab 4<br>진자</td>
+        <td style="padding:7px 10px">진자 길이 L<br>초기 각도 θ₀</td>
+        <td style="padding:7px 10px">주기 예측 + RK4 시뮬레이션</td>
+        <td style="padding:7px 10px">MAPE, 이론값 비교</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p style="text-align:center;margin-top:12px" class="subtitle">이 설계로 PRD/TRD 문서를 작성할까요?</p>

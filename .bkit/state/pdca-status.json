@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-26T12:53:25.722Z",
+  "lastUpdated": "2026-03-26T13:18:36.162Z",
   "activeFeatures": [
     "model",
     "LinRegSpr",
@@ -12,7 +12,8 @@
     "cnn_filter_visualizer",
     "logic",
     "panels",
-    "week3"
+    "week3",
+    "cnn_filter_visualizer_pyside6"
   ],
   "primaryFeature": "model",
   "features": {
@@ -129,9 +130,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-26T11:45:52.571Z",
-        "lastUpdated": "2026-03-26T11:45:52.571Z"
+        "lastUpdated": "2026-03-26T13:18:24.360Z"
       },
-      "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\cnn_filter_visualizer\\logic\\convolution.py"
+      "lastFile": "/c/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/cnn_filter_visualizer_pyside6/logic/convolution.py"
     },
     "panels": {
       "phase": "do",
@@ -142,9 +143,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-26T11:46:21.477Z",
-        "lastUpdated": "2026-03-26T11:47:43.831Z"
+        "lastUpdated": "2026-03-26T13:17:55.111Z"
       },
-      "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\cnn_filter_visualizer\\panels\\control_panel.py"
+      "lastFile": "/c/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/cnn_filter_visualizer_pyside6/panels/control_panel.py"
     },
     "week3": {
       "phase": "do",
@@ -158,6 +159,19 @@
         "lastUpdated": "2026-03-26T12:53:25.721Z"
       },
       "lastFile": "C:\\Users\\user\\Desktop\\믿힌 AI goat\\AIandMLcourse\\week3\\05_universal_approximation.py"
+    },
+    "cnn_filter_visualizer_pyside6": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-26T13:15:40.427Z",
+        "lastUpdated": "2026-03-26T13:18:36.162Z"
+      },
+      "lastFile": "/c/Users/user/Desktop/믿힌 AI goat/AIandMLcourse/week3/cnn_filter_visualizer_pyside6/utils/image_loader.py"
     }
   },
   "pipeline": {
@@ -168,7 +182,7 @@
   "session": {
     "startedAt": "2026-03-18T00:02:14.905Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-26T12:53:25.722Z"
+    "lastActivity": "2026-03-26T13:18:36.162Z"
   },
   "history": [
     {
@@ -432,6 +446,72 @@
     {
       "timestamp": "2026-03-26T12:53:25.721Z",
       "feature": "week3",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:15:40.427Z",
+      "feature": "cnn_filter_visualizer_pyside6",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:16:13.207Z",
+      "feature": "cnn_filter_visualizer_pyside6",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:16:17.455Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:16:45.023Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:17:03.907Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:17:55.111Z",
+      "feature": "panels",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:18:00.822Z",
+      "feature": "logic",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:18:01.565Z",
+      "feature": "cnn_filter_visualizer_pyside6",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:18:10.126Z",
+      "feature": "logic",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:18:24.360Z",
+      "feature": "logic",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T13:18:36.162Z",
+      "feature": "cnn_filter_visualizer_pyside6",
       "phase": "do",
       "action": "updated"
     }

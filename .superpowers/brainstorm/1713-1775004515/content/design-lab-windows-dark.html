@@ -1,0 +1,182 @@
+<h2>설계 Section 2 · BaseLabWindow & 각 Lab <span style="color:#7aa2f7">(Dark Theme)</span></h2>
+<p class="subtitle">3패널 뼈대 + QThread 학습 흐름 + Lab별 시각화</p>
+
+<div class="section">
+  <h3>BaseLabWindow — 3패널 구조 (다크 테마)</h3>
+  <div class="mockup">
+    <div class="mockup-header">모든 Lab 공통 레이아웃</div>
+    <div class="mockup-body" style="padding:0;background:#1a1b26">
+
+      <!-- 헤더 -->
+      <div style="background:#16213e;color:#7aa2f7;padding:8px 14px;font-size:12px;font-weight:bold;border-bottom:1px solid #2a2d3e">
+        Lab N · 제목 &nbsp;|&nbsp; MIT 6.S191 Week 4
+      </div>
+
+      <div style="display:flex;min-height:380px">
+
+        <!-- 좌: 컨트롤 패널 -->
+        <div style="width:200px;background:#16213e;border-right:1px solid #2a2d3e;padding:10px;font-size:11px">
+          <div style="font-weight:bold;color:#7aa2f7;margin-bottom:8px;font-size:12px">⚙ 파라미터</div>
+
+          <div style="margin-bottom:6px">
+            <div style="color:#a9b1d6;margin-bottom:2px">Hidden Layers</div>
+            <div style="background:#1e2030;border:1px solid #3b4261;padding:4px 6px;border-radius:4px;font-family:monospace;color:#c0caf5">[64, 64]</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="color:#a9b1d6;margin-bottom:2px">Activation</div>
+            <div style="background:#1e2030;border:1px solid #3b4261;padding:4px 6px;border-radius:4px;color:#c0caf5">tanh ▾</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="color:#a9b1d6;margin-bottom:2px">Epochs</div>
+            <div style="background:#1e2030;border:1px solid #3b4261;padding:4px 6px;border-radius:4px;color:#c0caf5">1000</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="color:#a9b1d6;margin-bottom:2px">Learning Rate</div>
+            <div style="background:#1e2030;border:1px solid #3b4261;padding:4px 6px;border-radius:4px;color:#c0caf5">0.001</div>
+          </div>
+
+          <div style="border-top:1px solid #2a2d3e;margin:10px 0 8px"></div>
+          <div style="font-weight:bold;color:#7aa2f7;margin-bottom:6px;font-size:12px">🎯 Lab 고유 파라미터</div>
+          <div style="background:#1e2030;border:1px solid #3b4261;padding:6px;border-radius:4px;color:#565f89;font-size:10px;text-align:center">
+            각 Lab 서브클래스가<br>여기에 위젯 추가
+          </div>
+
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:5px">
+            <div style="background:#7aa2f7;color:#1a1b26;text-align:center;padding:6px;border-radius:4px;font-size:11px;font-weight:bold;cursor:pointer">▶ Train</div>
+            <div style="background:#f7768e;color:#1a1b26;text-align:center;padding:6px;border-radius:4px;font-size:11px;font-weight:bold;cursor:pointer">⏹ Stop</div>
+            <div style="background:#2a2d3e;color:#a9b1d6;text-align:center;padding:6px;border-radius:4px;font-size:11px;cursor:pointer;border:1px solid #3b4261">↺ Reset</div>
+          </div>
+
+          <div style="margin-top:10px">
+            <div style="background:#2a2d3e;border-radius:3px;height:4px;overflow:hidden">
+              <div style="background:#9ece6a;height:100%;width:70%;border-radius:3px"></div>
+            </div>
+            <div style="color:#565f89;font-size:10px;margin-top:3px">Epoch 703 / 1000</div>
+          </div>
+        </div>
+
+        <!-- 중: 메인 차트 -->
+        <div style="flex:2;padding:12px;display:flex;flex-direction:column;gap:8px;background:#1a1b26">
+          <div style="font-weight:bold;color:#7aa2f7;font-size:11px">📐 메인 시각화</div>
+          <div style="flex:1;background:#1e2030;border:1px solid #2a2d3e;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#565f89;font-size:11px;text-align:center;line-height:1.8">
+            MatplotlibCanvas (dark background)<br>
+            <span style="color:#3d4461">함수 근사 / 궤적 / 모델 비교 / 진자 시뮬레이션</span>
+          </div>
+        </div>
+
+        <!-- 우: 정보 패널 -->
+        <div style="width:160px;border-left:1px solid #2a2d3e;padding:10px;font-size:11px;background:#16213e">
+          <div style="font-weight:bold;color:#7aa2f7;margin-bottom:8px;font-size:12px">📊 학습 현황</div>
+
+          <div style="margin-bottom:5px">
+            <div style="color:#565f89;font-size:10px">Train Loss</div>
+            <div style="font-weight:bold;color:#f7768e">0.00234</div>
+          </div>
+          <div style="margin-bottom:5px">
+            <div style="color:#565f89;font-size:10px">Val Loss</div>
+            <div style="font-weight:bold;color:#7aa2f7">0.00289</div>
+          </div>
+          <div style="margin-bottom:10px">
+            <div style="color:#565f89;font-size:10px">MAE</div>
+            <div style="font-weight:bold;color:#9ece6a">0.0381</div>
+          </div>
+
+          <div style="background:#1e2030;border:1px solid #2a2d3e;border-radius:4px;height:80px;display:flex;align-items:center;justify-content:center;color:#3d4461;font-size:10px;margin-bottom:8px">
+            📈 Loss 미니차트
+          </div>
+
+          <div style="border-top:1px solid #2a2d3e;padding-top:8px">
+            <div style="font-weight:bold;color:#7aa2f7;margin-bottom:5px;font-size:11px">🔬 Lab 고유 수치</div>
+            <div style="background:#1e2030;border:1px solid #2a2d3e;padding:5px;border-radius:4px;color:#565f89;font-size:10px;text-align:center">
+              서브클래스가<br>채우는 영역
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 푸터 -->
+      <div style="background:#0f111a;padding:5px 12px;font-size:10px;color:#3d4461;border-top:1px solid #2a2d3e">
+        MatplotlibCanvas (FigureCanvasQTAgg) · QThread TrainWorker · PySide6 Signals
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>런처 다크 테마</h3>
+  <div class="mockup">
+    <div class="mockup-header">Week 4 · Neural Network Visualizer — 런처</div>
+    <div class="mockup-body" style="padding:0;background:#1a1b26">
+      <div style="background:#16213e;color:#7aa2f7;padding:10px 14px;font-size:13px;font-weight:bold;border-bottom:1px solid #2a2d3e">
+        Week 4 · Neural Network Visualizer &nbsp;|&nbsp; MIT 6.S191
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px">
+        <div style="border:1px solid #7aa2f7;border-radius:8px;padding:14px;cursor:pointer;background:#1e2030">
+          <div style="font-size:24px;margin-bottom:4px">📐</div>
+          <div style="font-weight:bold;font-size:13px;color:#c0caf5">Lab 1 · 함수 근사</div>
+          <div style="color:#565f89;font-size:11px;margin-top:3px">Universal Approximation Theorem</div>
+          <div style="margin-top:8px;background:#7aa2f7;color:#1a1b26;text-align:center;padding:4px;border-radius:4px;font-size:11px;font-weight:bold">열기</div>
+        </div>
+        <div style="border:1px solid #2a2d3e;border-radius:8px;padding:14px;cursor:pointer;background:#1e2030">
+          <div style="font-size:24px;margin-bottom:4px">🚀</div>
+          <div style="font-weight:bold;font-size:13px;color:#c0caf5">Lab 2 · 포물선 회귀</div>
+          <div style="color:#565f89;font-size:11px;margin-top:3px">2D Regression — Physics</div>
+          <div style="margin-top:8px;background:#2a2d3e;color:#a9b1d6;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+        <div style="border:1px solid #2a2d3e;border-radius:8px;padding:14px;cursor:pointer;background:#1e2030">
+          <div style="font-size:24px;margin-bottom:4px">⚖️</div>
+          <div style="font-weight:bold;font-size:13px;color:#c0caf5">Lab 3 · 과적합 데모</div>
+          <div style="color:#565f89;font-size:11px;margin-top:3px">Overfitting vs Underfitting</div>
+          <div style="margin-top:8px;background:#2a2d3e;color:#a9b1d6;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+        <div style="border:1px solid #2a2d3e;border-radius:8px;padding:14px;cursor:pointer;background:#1e2030">
+          <div style="font-size:24px;margin-bottom:4px">🕰️</div>
+          <div style="font-weight:bold;font-size:13px;color:#c0caf5">Lab 4 · 진자 예측</div>
+          <div style="color:#565f89;font-size:11px;margin-top:3px">Pendulum Period — RK4 Sim</div>
+          <div style="margin-top:8px;background:#2a2d3e;color:#a9b1d6;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>컬러 팔레트 (Tokyo Night 기반)</h3>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#1a1b26;border:1px solid #2a2d3e;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">배경<br>#1a1b26</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#16213e;border:1px solid #2a2d3e;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">패널<br>#16213e</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#1e2030;border:1px solid #2a2d3e;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">카드<br>#1e2030</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#7aa2f7;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">액센트<br>#7aa2f7</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#9ece6a;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">성공/진행<br>#9ece6a</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#f7768e;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">경고/Stop<br>#f7768e</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#e0af68;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">강조<br>#e0af68</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:50px;height:50px;background:#c0caf5;border-radius:4px"></div>
+      <div style="font-size:10px;color:#888;margin-top:3px">텍스트<br>#c0caf5</div>
+    </div>
+  </div>
+</div>
+
+<p style="text-align:center;margin-top:16px" class="subtitle">이 다크 테마로 확정할까요? 색상 조정 원하시면 말씀해 주세요.</p>

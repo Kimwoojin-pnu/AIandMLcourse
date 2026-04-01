@@ -1,0 +1,93 @@
+<h2>Q1 · 앱 구조: 하나로 묶을까, 따로 만들까?</h2>
+<p class="subtitle">week4 에는 Lab 4개가 있습니다. PySide6 앱을 어떻게 구성할지 선택해 주세요.</p>
+
+<div class="options">
+
+  <div class="option" data-choice="unified" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>통합 단일 앱 (탭/사이드바)</h3>
+      <p>하나의 메인 윈도우 안에 Lab 1~4를 탭 또는 사이드바로 전환.</p>
+      <p><strong>장점</strong>: 설치·실행 파일 1개, 랩 간 공통 UI 공유, 학습자가 한 화면에서 모두 비교 가능.</p>
+      <p><strong>단점</strong>: 초기 로딩 시 TensorFlow 모델 전체 로드, 구조가 약간 복잡.</p>
+
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-header">통합 앱 와이어프레임</div>
+        <div class="mockup-body" style="padding:0">
+          <div style="background:#1A56A0;color:#fff;padding:8px 12px;font-size:12px;font-weight:bold;">
+            Week 4 · Neural Network Visualizer
+          </div>
+          <div style="display:flex;gap:0;border-top:1px solid #ddd">
+            <div style="width:140px;background:#f5f7fa;border-right:1px solid #ddd;padding:10px;font-size:11px">
+              <div style="background:#1A56A0;color:#fff;padding:5px 8px;border-radius:4px;margin-bottom:4px">📐 Lab 1: 함수 근사</div>
+              <div style="padding:5px 8px;border-radius:4px;margin-bottom:4px;color:#555">🚀 Lab 2: 포물선</div>
+              <div style="padding:5px 8px;border-radius:4px;margin-bottom:4px;color:#555">⚖️ Lab 3: 과적합</div>
+              <div style="padding:5px 8px;border-radius:4px;margin-bottom:4px;color:#555">🕰️ Lab 4: 진자</div>
+            </div>
+            <div style="flex:1;padding:12px;font-size:11px;color:#888">
+              [선택된 Lab의 컨트롤 + 차트 영역]
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="separate" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>랩별 독립 실행 앱 (4개 파일)</h3>
+      <p>week3처럼 각 Lab을 독립 폴더로 관리. <code>python main.py</code> 로 각각 실행.</p>
+      <p><strong>장점</strong>: 구조 단순, 각 Lab에 집중, week3 패턴 그대로 유지.</p>
+      <p><strong>단점</strong>: 4번 실행해야 함, 공통 코드 중복.</p>
+
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-header">독립 앱 구조</div>
+        <div class="mockup-body" style="font-size:11px;font-family:monospace;color:#444">
+          week4/<br>
+          &nbsp;&nbsp;lab1_function_approx/<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;main.py &nbsp;<span style="color:#888">← python main.py</span><br>
+          &nbsp;&nbsp;lab2_projectile/<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;main.py<br>
+          &nbsp;&nbsp;lab3_overfitting/<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;main.py<br>
+          &nbsp;&nbsp;lab4_pendulum/<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;main.py
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="launcher" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>런처 앱 + 독립 서브윈도우</h3>
+      <p>메인 런처에서 Lab을 선택하면 별도 윈도우로 열림. 동시에 여러 Lab 비교 가능.</p>
+      <p><strong>장점</strong>: 비교 분석에 유리, 독립성 유지.</p>
+      <p><strong>단점</strong>: 구현 복잡도 높음.</p>
+
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-header">런처 앱 와이어프레임</div>
+        <div class="mockup-body" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px">
+          <div style="border:2px solid #1A56A0;border-radius:6px;padding:8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px">📐</div>
+            <strong>Lab 1</strong><br><span style="color:#888">함수 근사</span>
+          </div>
+          <div style="border:1px solid #ddd;border-radius:6px;padding:8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px">🚀</div>
+            <strong>Lab 2</strong><br><span style="color:#888">포물선</span>
+          </div>
+          <div style="border:1px solid #ddd;border-radius:6px;padding:8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px">⚖️</div>
+            <strong>Lab 3</strong><br><span style="color:#888">과적합</span>
+          </div>
+          <div style="border:1px solid #ddd;border-radius:6px;padding:8px;text-align:center;cursor:pointer">
+            <div style="font-size:18px">🕰️</div>
+            <strong>Lab 4</strong><br><span style="color:#888">진자</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

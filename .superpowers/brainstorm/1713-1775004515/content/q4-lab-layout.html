@@ -1,0 +1,90 @@
+<h2>Q4 · Lab 서브윈도우 레이아웃</h2>
+<p class="subtitle">각 Lab이 열리는 서브윈도우의 패널 배치를 선택해 주세요.</p>
+
+<div class="options">
+
+  <div class="option" data-choice="left-right" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>좌: 컨트롤 · 우: 차트</h3>
+      <p>week3 CNN 비주얼라이저와 동일한 패턴. 컨트롤 패널이 고정폭, 차트가 나머지를 채움.</p>
+      <div class="mockup" style="margin-top:10px">
+        <div class="mockup-header">Lab 서브윈도우</div>
+        <div class="mockup-body" style="padding:0;display:flex;min-height:140px">
+          <div style="width:180px;background:#f5f7fa;border-right:1px solid #ddd;padding:10px;font-size:11px">
+            <div style="font-weight:bold;margin-bottom:8px;color:#1A56A0">⚙ 파라미터</div>
+            <div style="background:#e8edf3;padding:4px 6px;border-radius:3px;margin-bottom:4px">Hidden Layers: [64,64]</div>
+            <div style="background:#e8edf3;padding:4px 6px;border-radius:3px;margin-bottom:4px">Epochs: 1000</div>
+            <div style="background:#e8edf3;padding:4px 6px;border-radius:3px;margin-bottom:4px">LR: 0.01</div>
+            <div style="margin-top:8px">
+              <div style="background:#1A56A0;color:#fff;text-align:center;padding:5px;border-radius:3px;font-size:11px">▶ Train</div>
+            </div>
+          </div>
+          <div style="flex:1;padding:10px;font-size:11px;color:#888;display:flex;flex-direction:column;gap:6px">
+            <div style="flex:1;background:#f9f9f9;border:1px solid #ddd;border-radius:3px;display:flex;align-items:center;justify-content:center">📈 Loss 곡선</div>
+            <div style="flex:1;background:#f9f9f9;border:1px solid #ddd;border-radius:3px;display:flex;align-items:center;justify-content:center">📐 함수 근사 결과</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="top-bottom" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>상: 컨트롤 바 · 하: 차트</h3>
+      <p>컨트롤이 상단 수평 바로 배치, 차트가 넓게 아래를 차지. 와이드 모니터에 유리.</p>
+      <div class="mockup" style="margin-top:10px">
+        <div class="mockup-header">Lab 서브윈도우</div>
+        <div class="mockup-body" style="padding:0;display:flex;flex-direction:column;min-height:140px">
+          <div style="background:#f5f7fa;border-bottom:1px solid #ddd;padding:8px 12px;font-size:11px;display:flex;gap:10px;align-items:center">
+            <span style="color:#1A56A0;font-weight:bold">⚙</span>
+            <span style="background:#e8edf3;padding:3px 7px;border-radius:3px">Layers [64,64]</span>
+            <span style="background:#e8edf3;padding:3px 7px;border-radius:3px">Epochs 1000</span>
+            <span style="background:#e8edf3;padding:3px 7px;border-radius:3px">LR 0.01</span>
+            <span style="background:#1A56A0;color:#fff;padding:3px 10px;border-radius:3px">▶ Train</span>
+          </div>
+          <div style="flex:1;padding:10px;font-size:11px;color:#888;display:flex;gap:8px">
+            <div style="flex:1;background:#f9f9f9;border:1px solid #ddd;border-radius:3px;display:flex;align-items:center;justify-content:center">📈 Loss 곡선</div>
+            <div style="flex:1;background:#f9f9f9;border:1px solid #ddd;border-radius:3px;display:flex;align-items:center;justify-content:center">📐 메인 차트</div>
+            <div style="flex:1;background:#f9f9f9;border:1px solid #ddd;border-radius:3px;display:flex;align-items:center;justify-content:center">📊 분석</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="three-panel" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>3패널: 좌 컨트롤 · 중 메인차트 · 우 정보</h3>
+      <p>week3 CNN과 동일한 3패널 구조. 중앙 차트가 넓고, 우측에 실시간 수치/loss 표시.</p>
+      <div class="mockup" style="margin-top:10px">
+        <div class="mockup-header">Lab 서브윈도우</div>
+        <div class="mockup-body" style="padding:0;display:flex;min-height:140px">
+          <div style="width:140px;background:#f5f7fa;border-right:1px solid #ddd;padding:8px;font-size:10px">
+            <div style="font-weight:bold;color:#1A56A0;margin-bottom:6px">⚙ 파라미터</div>
+            <div style="background:#e8edf3;padding:3px 5px;border-radius:2px;margin-bottom:3px">Layers</div>
+            <div style="background:#e8edf3;padding:3px 5px;border-radius:2px;margin-bottom:3px">Epochs</div>
+            <div style="background:#e8edf3;padding:3px 5px;border-radius:2px;margin-bottom:3px">LR</div>
+            <div style="background:#e8edf3;padding:3px 5px;border-radius:2px;margin-bottom:3px">Activation</div>
+            <div style="background:#1A56A0;color:#fff;text-align:center;padding:4px;border-radius:2px;margin-top:6px;font-size:10px">▶ Train</div>
+          </div>
+          <div style="flex:2;padding:8px;font-size:10px;color:#888;display:flex;align-items:center;justify-content:center;background:#fafafa">
+            📐 메인 시각화 차트
+          </div>
+          <div style="width:130px;border-left:1px solid #ddd;padding:8px;font-size:10px;background:#fff">
+            <div style="font-weight:bold;color:#1A56A0;margin-bottom:6px">📊 학습 현황</div>
+            <div style="background:#f5f7fa;padding:3px 5px;border-radius:2px;margin-bottom:3px">Epoch: 0/1000</div>
+            <div style="background:#f5f7fa;padding:3px 5px;border-radius:2px;margin-bottom:3px">Loss: —</div>
+            <div style="background:#f5f7fa;padding:3px 5px;border-radius:2px;margin-bottom:3px">MAE: —</div>
+            <div style="margin-top:6px;background:#f9f9f9;border:1px solid #ddd;border-radius:2px;height:50px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:9px">
+              📈 loss 미니차트
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

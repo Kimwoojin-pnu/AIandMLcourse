@@ -1,0 +1,101 @@
+<h2>설계 Section 1 · 전체 아키텍처</h2>
+<p class="subtitle">플러그인 자동 발견 구조 — week4 Neural Network Visualizer</p>
+
+<div class="section">
+  <h3>폴더 구조</h3>
+  <div class="mockup">
+    <div class="mockup-header">week4/neural_network_visualizer_pyside6/</div>
+    <div class="mockup-body" style="font-family:monospace;font-size:12px;line-height:1.8">
+      <span style="color:#1A56A0;font-weight:bold">main.py</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 런처 진입점</span><br>
+      <span style="color:#1A56A0;font-weight:bold">launcher/</span><br>
+      &nbsp;&nbsp;launcher_window.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← QMainWindow, lab 카드 그리드</span><br>
+      &nbsp;&nbsp;lab_card.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 클릭 가능한 Lab 카드 위젯</span><br>
+      <span style="color:#1A56A0;font-weight:bold">shared/</span><br>
+      &nbsp;&nbsp;base_lab_window.py &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 3패널 뼈대 + 인터페이스 규약</span><br>
+      &nbsp;&nbsp;train_worker.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← QThread 학습 워커 (공통)</span><br>
+      &nbsp;&nbsp;matplotlib_canvas.py &nbsp;&nbsp;<span style="color:#888">← FigureCanvasQTAgg 래퍼 (공통)</span><br>
+      <span style="color:#E07B39;font-weight:bold">labs/</span><br>
+      &nbsp;&nbsp;<span style="color:#E07B39">lab1_function/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;lab_meta.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 플러그인 메타 (이름·아이콘·설명)</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;window.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← BaseLabWindow 상속</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;model.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← Keras 모델 정의</span><br>
+      &nbsp;&nbsp;<span style="color:#E07B39">lab2_projectile/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 동일 구조</span><br>
+      &nbsp;&nbsp;<span style="color:#E07B39">lab3_overfitting/</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 동일 구조</span><br>
+      &nbsp;&nbsp;<span style="color:#E07B39">lab4_pendulum/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888">← 동일 구조</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>플러그인 자동 발견 흐름</h3>
+  <div class="mockup">
+    <div class="mockup-header">런처 시작 시</div>
+    <div class="mockup-body" style="font-size:12px">
+      <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap">
+        <div style="background:#1A56A0;color:#fff;padding:8px 14px;border-radius:6px;font-size:11px">main.py 실행</div>
+        <div style="font-size:18px;margin:0 6px;color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:8px 14px;border-radius:6px;font-size:11px"><code>labs/</code> 폴더 스캔<br><span style="color:#888;font-size:10px">glob("labs/lab*/lab_meta.py")</span></div>
+        <div style="font-size:18px;margin:0 6px;color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:8px 14px;border-radius:6px;font-size:11px">각 <code>lab_meta.py</code> import<br><span style="color:#888;font-size:10px">LAB_META dict 읽기</span></div>
+        <div style="font-size:18px;margin:0 6px;color:#999">→</div>
+        <div style="background:#f0f4f8;border:1px solid #ccd;padding:8px 14px;border-radius:6px;font-size:11px">카드 그리드 동적 생성</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>lab_meta.py 규약 (플러그인 인터페이스)</h3>
+  <div class="mockup">
+    <div class="mockup-header">labs/lab1_function/lab_meta.py</div>
+    <div class="mockup-body" style="font-family:monospace;font-size:12px;color:#333">
+      LAB_META = {<br>
+      &nbsp;&nbsp;"id": "lab1_function",<br>
+      &nbsp;&nbsp;"title": "Lab 1 · 함수 근사",<br>
+      &nbsp;&nbsp;"icon": "📐",<br>
+      &nbsp;&nbsp;"description": "Universal Approximation Theorem",<br>
+      &nbsp;&nbsp;"window_class": "labs.lab1_function.window.Lab1Window",<br>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>런처 UI 와이어프레임</h3>
+  <div class="mockup">
+    <div class="mockup-header">Week 4 · Neural Network Visualizer — 런처</div>
+    <div class="mockup-body">
+      <div style="background:#1A56A0;color:#fff;padding:10px 14px;font-size:13px;font-weight:bold;margin:-12px -12px 12px">
+        Week 4 · Neural Network Visualizer &nbsp;|&nbsp; MIT 6.S191
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="border:2px solid #1A56A0;border-radius:8px;padding:14px;cursor:pointer;background:#f0f6ff">
+          <div style="font-size:24px;margin-bottom:4px">📐</div>
+          <div style="font-weight:bold;font-size:13px">Lab 1 · 함수 근사</div>
+          <div style="color:#888;font-size:11px;margin-top:3px">Universal Approximation Theorem</div>
+          <div style="margin-top:8px;background:#1A56A0;color:#fff;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+        <div style="border:1px solid #ddd;border-radius:8px;padding:14px;cursor:pointer">
+          <div style="font-size:24px;margin-bottom:4px">🚀</div>
+          <div style="font-weight:bold;font-size:13px">Lab 2 · 포물선 회귀</div>
+          <div style="color:#888;font-size:11px;margin-top:3px">2D Regression — Physics</div>
+          <div style="margin-top:8px;background:#555;color:#fff;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+        <div style="border:1px solid #ddd;border-radius:8px;padding:14px;cursor:pointer">
+          <div style="font-size:24px;margin-bottom:4px">⚖️</div>
+          <div style="font-weight:bold;font-size:13px">Lab 3 · 과적합 데모</div>
+          <div style="color:#888;font-size:11px;margin-top:3px">Overfitting vs Underfitting</div>
+          <div style="margin-top:8px;background:#555;color:#fff;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+        <div style="border:1px solid #ddd;border-radius:8px;padding:14px;cursor:pointer">
+          <div style="font-size:24px;margin-bottom:4px">🕰️</div>
+          <div style="font-weight:bold;font-size:13px">Lab 4 · 진자 예측</div>
+          <div style="color:#888;font-size:11px;margin-top:3px">Pendulum Period — RK4 Sim</div>
+          <div style="margin-top:8px;background:#555;color:#fff;text-align:center;padding:4px;border-radius:4px;font-size:11px">열기</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p style="text-align:center;margin-top:16px" class="subtitle">이 아키텍처 구조가 괜찮으면 다음 섹션(각 Lab 세부 설계)으로 넘어갑니다.</p>
