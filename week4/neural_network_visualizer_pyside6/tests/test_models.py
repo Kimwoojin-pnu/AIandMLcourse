@@ -39,3 +39,15 @@ def test_lab1_make_model_output_shape():
     m = make_model([32, 16], "relu", 0.001)
     out = m.predict(np.zeros((5, 1), dtype="float32"), verbose=0)
     assert out.shape == (5, 1)
+
+def test_lab2_make_data_shape():
+    from labs.lab2_projectile.model import make_data
+    X, Y = make_data()
+    assert X.shape == (2000, 3)
+    assert Y.shape == (2000, 2)
+
+def test_lab2_true_trajectory_shape():
+    from labs.lab2_projectile.model import true_trajectory
+    t, x, y = true_trajectory(v0=30.0, theta_deg=45.0)
+    assert len(t) == len(x) == len(y) == 100
+    assert float(y[0]) == pytest.approx(0.0, abs=0.01)
