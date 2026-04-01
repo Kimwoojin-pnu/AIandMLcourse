@@ -51,3 +51,15 @@ def test_lab2_true_trajectory_shape():
     t, x, y = true_trajectory(v0=30.0, theta_deg=45.0)
     assert len(t) == len(x) == len(y) == 100
     assert float(y[0]) == pytest.approx(0.0, abs=0.01)
+
+def test_lab3_make_data_shape():
+    from labs.lab3_overfitting.model import make_data
+    x_tr, y_tr, x_plot, y_true = make_data()
+    assert x_tr.shape[1] == 1
+    assert y_tr.shape[1] == 1
+
+def test_lab3_model_configs():
+    from labs.lab3_overfitting.model import MODEL_CONFIGS
+    assert "Underfit" in MODEL_CONFIGS
+    assert "Good Fit" in MODEL_CONFIGS
+    assert "Overfit" in MODEL_CONFIGS
