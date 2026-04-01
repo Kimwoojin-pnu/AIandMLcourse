@@ -9,14 +9,15 @@ class LabCard(QFrame):
     def __init__(self, meta: dict, parent=None):
         super().__init__(parent)
         self._meta = meta
-        self.setFixedSize(200, 160)
+        self.setObjectName("LabCard")
+        self.setFixedSize(200, 170)
         self.setStyleSheet(f"""
-            QFrame {{
+            QFrame#LabCard {{
                 background: {COLORS['card']};
                 border: 1px solid {COLORS['border']};
                 border-radius: 8px;
             }}
-            QFrame:hover {{
+            QFrame#LabCard:hover {{
                 border: 1px solid {COLORS['accent']};
             }}
         """)

@@ -89,11 +89,16 @@ class LauncherWindow(QMainWindow):
             w.raise_()
             w.activateWindow()
             return
-        module_path, cls_name = window_class_path.rsplit(".", 1)
-        mod = importlib.import_module(module_path)
-        cls = getattr(mod, cls_name)
-        win = cls()
-        win.setAttribute(win.WA_DeleteOnClose if hasattr(win, 'WA_DeleteOnClose') else 55)
-        win.destroyed.connect(lambda: self._open_windows.pop(window_class_path, None))
-        self._open_windows[window_class_path] = win
-        win.show()
+        try:
+            module_path, cls_name = window_class_path.rsplit(".", 1)
+            mod = importlib.import_module(module_path)
+            cls = getattr(mod, cls_name)
+            win = cls()
+            from PySide6.QtCore import Qt
+            win.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
+            win.destroyed.connect(lambda: self._open_windows.pop(window_class_path, None))
+            self._open_windows[window_class_path] = win
+            win.show()
+        except Exception as exc:
+            from PySide6.QtWidgets import QMessageBox
+            QMessageBox.critical(self, "Error", f"Lab 열기 실패:\n{exc}")
