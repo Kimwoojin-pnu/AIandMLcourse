@@ -63,3 +63,22 @@ def test_lab3_model_configs():
     assert "Underfit" in MODEL_CONFIGS
     assert "Good Fit" in MODEL_CONFIGS
     assert "Overfit" in MODEL_CONFIGS
+
+def test_lab4_make_data_shape():
+    from labs.lab4_pendulum.model import make_data
+    X, Y = make_data()
+    assert X.shape == (2000, 2)
+    assert Y.shape == (2000, 1)
+
+def test_lab4_rk4_simulation():
+    import numpy as np
+    from labs.lab4_pendulum.model import rk4_simulate
+    t, theta = rk4_simulate(L=1.0, theta0_deg=30.0)
+    assert len(t) > 10
+    assert abs(float(theta[0]) - np.radians(30.0)) < 0.01
+
+def test_lab4_theoretical_period():
+    import numpy as np
+    from labs.lab4_pendulum.model import theoretical_period
+    T = theoretical_period(L=1.0, theta0_deg=5.0)
+    assert abs(T - 2 * np.pi * np.sqrt(1.0 / 9.8)) < 0.01
