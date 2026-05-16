@@ -205,9 +205,21 @@ def calculate_energy(theta1, omega1, theta2, omega2):
 E_A = calculate_energy(theta1_A, omega1_A, theta2_A, omega2_A)
 E_B = calculate_energy(theta1_B, omega1_B, theta2_B, omega2_B)
 
+# theta=90°일 때 E0=0이 되므로, E0가 너무 작으면 물리적 에너지 스케일로 대체
+E_scale = (m1 + m2) * g * (L1 + L2)  # 시스템 최대 위치에너지 기준 (≈19.62 J)
+
+def energy_error_str(E):
+    dE = E.max() - E.min()
+    E0 = abs(E[0])
+    # E0가 시스템 에너지 스케일의 1% 미만이면 절댓값 기준으로 보고
+    if E0 > E_scale * 0.01:
+        return f"dE/E0 = {dE/E0*100:.4f}%"
+    else:
+        return f"dE = {dE:.6f} J (E0<<E_scale)  dE/E_scale = {dE/E_scale*100:.6f}%"
+
 print(f"\n에너지 보존:")
-print(f"  진자 A: ΔE/E0 = {(E_A.max() - E_A.min())/abs(E_A[0])*100:.4f}%")
-print(f"  진자 B: ΔE/E0 = {(E_B.max() - E_B.min())/abs(E_B[0])*100:.4f}%")
+print(f"  진자 A: {energy_error_str(E_A)}")
+print(f"  진자 B: {energy_error_str(E_B)}")
 
 # ============================================================================
 # 시각화
