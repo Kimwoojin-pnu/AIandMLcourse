@@ -5,11 +5,16 @@
 포텐셜 장벽을 통과하는 양자 입자의 투과 및 반사를 시뮬레이션
 """
 
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 from scipy.linalg import eigh
 import os
+
+sys.stdout.reconfigure(encoding='utf-8')
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
 
 # 출력 디렉토리 확인
 output_dir = 'outputs'

@@ -5,12 +5,17 @@
 양자역학의 대표적인 포텐셜에서의 파동함수와 에너지 준위
 """
 
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 from scipy.linalg import eigh
 from scipy.special import hermite, factorial
 import os
+
+sys.stdout.reconfigure(encoding='utf-8')
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
 
 # 출력 디렉토리 확인
 output_dir = 'outputs'
